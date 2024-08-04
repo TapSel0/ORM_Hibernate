@@ -5,9 +5,9 @@
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/yourdatabase</property>
-        <property name="hibernate.connection.username">yourusername</property>
-        <property name="hibernate.connection.password">yourpassword</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test_database</property>
+        <property name="hibernate.connection.username">admin</property>
+        <property name="hibernate.connection.password">2!JFk_MFLA$36s_fw</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
