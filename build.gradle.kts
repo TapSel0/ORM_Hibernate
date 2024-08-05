@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    application
 }
 
 group = "org.example"
@@ -10,10 +11,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
-    implementation("org.hibernate:hibernate-core:6.5.2.Final")
+    implementation("org.hibernate:hibernate-core:5.4.32.Final")
     implementation("org.springframework:spring-context:5.3.8")
     implementation("javax.persistence:javax.persistence-api:2.2")
     implementation("mysql:mysql-connector-java:8.0.32")
@@ -21,4 +20,8 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+application {
+    mainClass.set("org.example.Main")
 }
