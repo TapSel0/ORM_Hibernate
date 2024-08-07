@@ -1,22 +1,20 @@
 package org.example;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Entity
 @Table(name = "products")
-public class Product implements Serializable {
+class Product{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id", updatable = false, nullable = false)
-    private Long id;
+    @GeneratedValue
+    public Long id;
 
     @Column(name = "name")
-    private String name;
+    public String name;
 
     @Column(name = "price")
-    private Double price;
+    public Double price;
 
 
     public Product(){}
@@ -50,3 +48,6 @@ public class Product implements Serializable {
 
 
 }
+
+
+
