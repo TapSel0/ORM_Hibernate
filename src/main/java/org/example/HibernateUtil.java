@@ -97,20 +97,40 @@ public class HibernateUtil {
     public static void updateEntity(Long id, String new_name){
         createSession();
         try (Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+
             Product product = session.get(Product.class, id);
             product.setName(new_name);
-            session.evict(product);
-            session.saveOrUpdate(product);
+
+            session.update(product);
+            transaction.commit();
             System.out.println("Row was changed");
         }
     }
     public static void updateEntity(Long id, Double new_price){
         createSession();
         try (Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+
             Product product = session.get(Product.class, id);
             product.setPrice(new_price);
-            session.evict(product);
-            session.saveOrUpdate(product);
+
+            session.update(product);
+            transaction.commit();
+            System.out.println("Row was changed");
+        }
+    }
+    public static void updateEntity(Long id, String new_name, Double new_price){
+        createSession();
+        try (Session session = sessionFactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+
+            Product product = session.get(Product.class, id);
+            product.setPrice(new_price);
+            product.setName(new_name);
+
+            session.update(product);
+            transaction.commit();
             System.out.println("Row was changed");
         }
     }
