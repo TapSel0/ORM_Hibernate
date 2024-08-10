@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import javax.persistence.*;
 import java.util.List;
 
-public class HibernateUtil {
+public class ProductDAO {
     private final static EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPersistenceUnit");
     private static EntityManager em;
     private static EntityTransaction tx;
@@ -44,7 +44,7 @@ public class HibernateUtil {
 
 
     // Adding new product
-    public static void addEntity(String name, Double price){
+    public static void save(String name, Double price){
         Product product = new Product();
         product.setName(name);
         product.setPrice(price);
@@ -70,7 +70,7 @@ public class HibernateUtil {
 
 
     //Reading
-    public static void readEntity(Long id){
+    public static void getById(Long id){
         try{
            createTransaction();
            tx.begin();
@@ -94,7 +94,7 @@ public class HibernateUtil {
 
 
     //Updating
-    public static void updateEntity(Long id, String new_name){
+    public static void update(Long id, String new_name){
         createSession();
         try (Session session = sessionFactory.openSession()){
             Transaction transaction = session.beginTransaction();
@@ -107,7 +107,7 @@ public class HibernateUtil {
             System.out.println("Row was changed");
         }
     }
-    public static void updateEntity(Long id, Double new_price){
+    public static void update(Long id, Double new_price){
         createSession();
         try (Session session = sessionFactory.openSession()){
             Transaction transaction = session.beginTransaction();
@@ -120,7 +120,7 @@ public class HibernateUtil {
             System.out.println("Row was changed");
         }
     }
-    public static void updateEntity(Long id, String new_name, Double new_price){
+    public static void update(Long id, String new_name, Double new_price){
         createSession();
         try (Session session = sessionFactory.openSession()){
             Transaction transaction = session.beginTransaction();
@@ -138,7 +138,7 @@ public class HibernateUtil {
 
 
     //Deleting
-    public static void deleteEntity(Product product){
+    public static void delete(Product product){
         createSession();
         try(Session session = sessionFactory.openSession())
         {
@@ -148,7 +148,7 @@ public class HibernateUtil {
             System.out.println("Row deleted");
         }
     }
-    public static void deleteEntity(Long id, String name, Double price){
+    public static void delete(Long id, String name, Double price){
         createSession();
         try(Session session = sessionFactory.openSession())
         {
@@ -162,7 +162,7 @@ public class HibernateUtil {
 
 
     //Select all
-    public static void selectAll(){
+    public static void getAll(){
         try {
             createTransaction();
             tx.begin();
