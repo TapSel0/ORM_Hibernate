@@ -46,7 +46,9 @@ class Product{
         return price;
     }
 
-
+    public void print(){
+        System.out.println("Key: " + id + ", name = " + name + ", price = " + price);
+    }
 }
 
 

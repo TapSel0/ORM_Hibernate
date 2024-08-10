@@ -92,6 +92,56 @@ public class ProductDAO {
     }
 
 
+    //get all rows
+    public static List<Product> getProductList(int from, int count){
+        List<Product> result;
+        try{
+            createTransaction();
+            tx.begin();
+            result = em.createQuery("from Product", Product.class)
+                    .setFirstResult(from)
+                    .setMaxResults(count)
+                    .getResultList();
+            tx.commit();
+            return result;
+        }
+        catch (Exception e){
+            if (tx != null && tx.isActive()){
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        }
+        finally {
+            if (em != null){
+                em.close();
+            }
+        }
+    }
+
+
+    //return count of products
+    public static Long getProductCount(){
+        Long result;
+        try{
+            createTransaction();
+            tx.begin();
+            result = em.createQuery("select count(*) from Product", Long.class).getSingleResult();
+            tx.commit();
+            return result;
+        }
+        catch (Exception e){
+            if (tx != null && tx.isActive()){
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        }
+        finally {
+            if (em != null){
+                em.close();
+            }
+        }
+    }
+
 
     //Updating
     public static void update(Long id, String new_name){
@@ -157,6 +207,27 @@ public class ProductDAO {
             session.delete(product);
             transaction.commit();
             System.out.println("Row deleted");
+        }
+    }
+
+    public static void deleteById(Long id){
+        try{
+            createTransaction();
+            tx.begin();
+            Product product = em.find(Product.class, id);
+            em.remove(product);
+            tx.commit();
+        }
+        catch (Exception e){
+            if (tx != null && tx.isActive()){
+                tx.rollback();
+            }
+            throw e;
+        }
+        finally {
+            if (em != null){
+                em.close();
+            }
         }
     }
 
